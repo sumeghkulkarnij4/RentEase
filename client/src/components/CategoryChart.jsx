@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config/api";
 
 import {
   PieChart,
@@ -29,7 +30,7 @@ function CategoryChart() {
   const fetchCategories = async () => {
 
     const res = await fetch(
-      "http://localhost:5000/api/dashboard/categories"
+      `${API_BASE_URL}/api/dashboard/categories`
     );
 
     const result = await res.json();

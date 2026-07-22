@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ArrowLeft, Check, ShieldCheck, Truck, RotateCcw } from "lucide-react";
 import { motion } from "framer-motion";
+import { API_BASE_URL, getImageUrl } from "./config/api";
 import "./styles/shopping.css";
 
 function ProductDetails() {
@@ -15,7 +16,7 @@ function ProductDetails() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetch(`http://localhost:5000/api/products/${id}`)
+    fetch(`${API_BASE_URL}/api/products/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProduct(data);
@@ -106,7 +107,7 @@ function ProductDetails() {
               </span>
             )}
             <img 
-              src={product.image.startsWith("http") ? product.image : `http://localhost:5000/images/${product.image}`} 
+              src={getImageUrl(product.image)} 
               alt={product.name} 
               className="details-image"
             />

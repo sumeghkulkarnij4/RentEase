@@ -9,7 +9,17 @@ const app = express();
 /* ================= MIDDLEWARE ================= */
 
 app.use(express.json());
-app.use(cors());
+
+const allowedOrigins = process.env.FRONTEND_URL
+  ? [process.env.FRONTEND_URL, "http://localhost:5173", "http://localhost:3000"]
+  : true; // allow all in dev if not set
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 /* ================= STATIC IMAGES ================= */
 

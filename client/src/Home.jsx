@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Star, ShieldCheck, Truck, Clock } from "lucide-react";
+import { API_BASE_URL, getImageUrl } from "./config/api";
 import "./styles/home.css";
 
 function Home() {
@@ -10,7 +11,7 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch(`${API_BASE_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         // Just take first 4 for featured
@@ -220,7 +221,7 @@ function Home() {
                     <div className="product-img-wrapper">
                       {product.stock === 0 && <span className="product-badge">Out of Stock</span>}
                       <img 
-                        src={product.image.startsWith("http") ? product.image : `http://localhost:5000/images/${product.image}`} 
+                        src={getImageUrl(product.image)} 
                         alt={product.name} 
                         className="product-img"
                       />

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config/api";
 
 import {
   ResponsiveContainer,
@@ -23,7 +24,7 @@ function RentalsChart() {
   const fetchRentals = async () => {
 
     const res = await fetch(
-      "http://localhost:5000/api/dashboard/monthly"
+      `${API_BASE_URL}/api/dashboard/monthly`
     );
 
     const result = await res.json();

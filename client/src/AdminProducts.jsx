@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AdminSidebar from "./components/AdminSidebar";
+import { API_BASE_URL, getImageUrl } from "./config/api";
 import "./styles/admin.css";
 
 function AdminProducts() {
@@ -36,7 +37,7 @@ function AdminProducts() {
     try {
 
       const res = await fetch(
-        "http://localhost:5000/api/products"
+        `${API_BASE_URL}/api/products`
       );
 
       const data = await res.json();
@@ -168,8 +169,8 @@ function AdminProducts() {
 
     const url=
     editing
-    ? `http://localhost:5000/api/products/${editing}`
-    : "http://localhost:5000/api/products";
+    ? `${API_BASE_URL}/api/products/${editing}`
+    : `${API_BASE_URL}/api/products`;
 
     const formData=
     new FormData();
@@ -264,7 +265,7 @@ function AdminProducts() {
     try {
 
       const res = await fetch(
-        `http://localhost:5000/api/products/${id}`,
+        `${API_BASE_URL}/api/products/${id}`,
         {
           method: "DELETE",
         }

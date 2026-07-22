@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config/api";
 
 function TopProducts() {
 
@@ -13,7 +14,7 @@ function TopProducts() {
   const fetchProducts = async () => {
 
     const res = await fetch(
-      "http://localhost:5000/api/dashboard/top-products"
+      `${API_BASE_URL}/api/dashboard/top-products`
     );
 
     const data = await res.json();

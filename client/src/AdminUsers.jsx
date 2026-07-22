@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AdminSidebar from "./components/AdminSidebar";
+import { API_BASE_URL } from "./config/api";
 import "./styles/admin.css";
 
 function AdminUsers() {
@@ -26,7 +27,7 @@ function AdminUsers() {
   const fetchUsers = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/users"
+        `${API_BASE_URL}/api/users`
       );
 
       const data = await res.json();
@@ -91,7 +92,7 @@ function AdminUsers() {
   const saveUser = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/users/${editing}`,
+        `${API_BASE_URL}/api/users/${editing}`,
         {
           method: "PUT",
           headers: {
@@ -127,7 +128,7 @@ function AdminUsers() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/users/${id}`,
+        `${API_BASE_URL}/api/users/${id}`,
         {
           method: "DELETE",
         }

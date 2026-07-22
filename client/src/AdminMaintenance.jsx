@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AdminSidebar from "./components/AdminSidebar";
+import { API_BASE_URL } from "./config/api";
 import "./styles/admin.css";
 
 function AdminMaintenance() {
@@ -18,7 +19,7 @@ function AdminMaintenance() {
   const fetchRequests = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/maintenance"
+        `${API_BASE_URL}/api/maintenance`
       );
 
       const data = await res.json();
@@ -65,7 +66,7 @@ function AdminMaintenance() {
   ) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/maintenance/${id}`,
+        `${API_BASE_URL}/api/maintenance/${id}`,
         {
           method: "PUT",
 
@@ -97,7 +98,7 @@ function AdminMaintenance() {
     async (id, name) => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/maintenance/${id}`,
+          `${API_BASE_URL}/api/maintenance/${id}`,
           {
             method: "PUT",
 
@@ -137,7 +138,7 @@ function AdminMaintenance() {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/api/maintenance/${id}`,
+          `${API_BASE_URL}/api/maintenance/${id}`,
           {
             method: "DELETE",
           }

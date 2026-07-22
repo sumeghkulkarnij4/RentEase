@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL, getImageUrl } from "../config/api";
 
 function RecommendedProducts({ category }) {
 
@@ -11,7 +12,7 @@ function RecommendedProducts({ category }) {
   const fetchRecommendations = async () => {
 
     const res = await fetch(
-      `http://localhost:5000/api/recommendations/${category}`
+      `${API_BASE_URL}/api/recommendations/${category}`
     );
 
     const data = await res.json();
@@ -35,7 +36,7 @@ function RecommendedProducts({ category }) {
           >
 
             <img
-              src={`http://localhost:5000/images/${product.image}`}
+              src={getImageUrl(product.image)}
               alt={product.name}
             />
 

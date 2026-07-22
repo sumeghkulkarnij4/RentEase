@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import AdminSidebar from "./components/AdminSidebar";
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "./config/api";
 import "./styles/admin.css";
 
 const getStatusBadgeClass = (status) => {
@@ -36,8 +37,8 @@ function AdminDashboard() {
   const fetchDashboardData = async () => {
     try {
       const [analyticsRes, ordersRes] = await Promise.all([
-        fetch("http://localhost:5000/api/dashboard/analytics"),
-        fetch("http://localhost:5000/api/orders/admin/all"),
+        fetch(`${API_BASE_URL}/api/dashboard/analytics`),
+        fetch(`${API_BASE_URL}/api/orders/admin/all`),
       ]);
       const analyticsData = await analyticsRes.json();
       const ordersData = await ordersRes.json();

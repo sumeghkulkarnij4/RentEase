@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Calendar, Clock, Wrench, RefreshCw, Package } from "lucide-react";
 import { motion } from "framer-motion";
+import { API_BASE_URL, getImageUrl } from "./config/api";
 import "./styles/postpurchase.css";
 
 function Rentals() {
@@ -20,7 +21,7 @@ function Rentals() {
     }
 
     const userId = user._id || user.id;
-    fetch(`http://localhost:5000/api/orders/user/${userId}`)
+    fetch(`${API_BASE_URL}/api/orders/user/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         const active = Array.isArray(data)
@@ -55,7 +56,7 @@ function Rentals() {
     if (!issue) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/maintenance", {
+      const res = await fetch(`${API_BASE_URL}/api/maintenance`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -134,7 +135,7 @@ function Rentals() {
                       <img
                         src={firstItem.image?.startsWith("http")
                           ? firstItem.image
-                          : `http://localhost:5000/images/${firstItem.image}`}
+                          : getImageUrl(firstItem.image)}
                         alt={firstItem.name}
                         className="rental-img"
                       />

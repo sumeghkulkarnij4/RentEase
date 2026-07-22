@@ -1,0 +1,31 @@
+# ===== Dependencies =====
+node_modules/
+*/node_modules/
+
+# ===== Environment Variables (NEVER commit secrets) =====
+.env
+.env.local
+.env.production
+.env.*.local
+server/.env
+
+# ===== Frontend Build =====
+client/dist/
+client/dist-ssr/
+
+# ===== Logs =====
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ===== OS & Editor =====
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

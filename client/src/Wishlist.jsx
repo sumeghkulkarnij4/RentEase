@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { HeartOff, ShoppingCart, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getImageUrl } from "./config/api";
 import "./styles/shopping.css";
 
 function Wishlist() {
@@ -99,7 +100,7 @@ function Wishlist() {
                   <div className="product-img-wrapper">
                     {product.stock === 0 && <span className="product-badge">Out of Stock</span>}
                     <img 
-                      src={product.image.startsWith("http") ? product.image : `http://localhost:5000/images/${product.image}`} 
+                      src={getImageUrl(product.image)} 
                       alt={product.name} 
                       className="product-img"
                     />

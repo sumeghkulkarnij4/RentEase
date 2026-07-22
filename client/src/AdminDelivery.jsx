@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AdminSidebar from "./components/AdminSidebar";
+import { API_BASE_URL } from "./config/api";
 import "./styles/admin.css";
 
 function AdminDelivery() {
   const [orders, setOrders] = useState([]);
 
   const loadOrders = () => {
-    fetch("http://localhost:5000/api/orders/admin/all")
+    fetch(`${API_BASE_URL}/api/orders/admin/all`)
       .then((res) => res.json())
       .then((data) => setOrders(data))
       .catch((err) => console.log(err));
@@ -20,7 +21,7 @@ function AdminDelivery() {
   const updatePickupStatus = async (id, status) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/orders/${id}/pickup`,
+        `${API_BASE_URL}/api/orders/${id}/pickup`,
         {
           method: "PUT",
           headers: {

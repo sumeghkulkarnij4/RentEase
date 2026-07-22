@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AdminSidebar from "./components/AdminSidebar";
+import { API_BASE_URL } from "./config/api";
 import "./styles/admin.css";
 
 function AdminDamage() {
@@ -18,7 +19,7 @@ function AdminDamage() {
   const fetchClaims = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/damage"
+        `${API_BASE_URL}/api/damage`
       );
 
       const data = await res.json();
@@ -62,7 +63,7 @@ function AdminDamage() {
   ) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/damage/${id}`,
+        `${API_BASE_URL}/api/damage/${id}`,
         {
           method: "PUT",
 
@@ -101,7 +102,7 @@ function AdminDamage() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/damage/${id}`,
+        `${API_BASE_URL}/api/damage/${id}`,
         {
           method: "DELETE",
         }
@@ -212,7 +213,7 @@ function AdminDamage() {
               <td>
 
                 <img
-                  src={`http://localhost:5000/uploads/${claim.image}`}
+                  src={`${API_BASE_URL}/uploads/${claim.image}`}
                   alt="Damage"
                   className="damage-image"
                 />

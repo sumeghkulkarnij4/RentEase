@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Package, Search, Check, Download, XCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { API_BASE_URL, getImageUrl } from "./config/api";
 import "./styles/postpurchase.css";
 
 const STEPS = ["Pending", "Active", "Shipped", "Delivered"];
@@ -42,7 +43,7 @@ function Orders() {
 
   const fetchOrders = async (userId) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/user/${userId}`);
+      const res = await fetch(`${API_BASE_URL}/api/orders/user/${userId}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       setOrders(Array.isArray(data) ? data : []);
@@ -56,7 +57,7 @@ function Orders() {
   const handleCancelOrder = async (id) => {
     if (!window.confirm("Are you sure you want to cancel this order?")) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${id}/cancel`, {
+      const res = await fetch(`${API_BASE_URL}/api/orders/${id}/cancel`, {
         method: "PUT"
       });
       const data = await res.json();
@@ -181,7 +182,7 @@ function Orders() {
                         {items.map((item, i) => (
                           <div key={i} className="order-item-row">
                             <img
-                              src={item.image?.startsWith("http") ? item.image : `http://localhost:5000/images/${item.image}`}
+                              src={item.image?.startsWith("http") ? item.image : getImageUrl(item.image)}
                               alt={item.name}
                               className="order-item-img"
                               onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300"; }}

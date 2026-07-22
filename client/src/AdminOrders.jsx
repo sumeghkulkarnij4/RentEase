@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AdminSidebar from "./components/AdminSidebar";
+import { API_BASE_URL } from "./config/api";
 import "./styles/admin.css";
 
 function AdminOrders() {
@@ -18,7 +19,7 @@ function AdminOrders() {
   const fetchOrders = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/orders/admin/all"
+        `${API_BASE_URL}/api/orders/admin/all`
       );
 
       const data = await res.json();
@@ -55,7 +56,7 @@ function AdminOrders() {
   const updateStatus = async (id, value) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/orders/${id}/status`,
+        `${API_BASE_URL}/api/orders/${id}/status`,
         {
           method: "PUT",
           headers: {
@@ -86,7 +87,7 @@ function AdminOrders() {
   ) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/orders/${id}/payment`,
+        `${API_BASE_URL}/api/orders/${id}/payment`,
         {
           method: "PUT",
           headers: {
@@ -114,7 +115,7 @@ function AdminOrders() {
   ) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/orders/${id}/delivery`,
+        `${API_BASE_URL}/api/orders/${id}/delivery`,
         {
           method: "PUT",
           headers: {
@@ -146,7 +147,7 @@ function AdminOrders() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/orders/${id}`,
+        `${API_BASE_URL}/api/orders/${id}`,
         {
           method: "DELETE",
         }

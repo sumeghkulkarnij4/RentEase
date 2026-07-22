@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowRight, Filter, Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { API_BASE_URL, getImageUrl } from "./config/api";
 import "./styles/shopping.css";
 
 function Products() {
@@ -33,7 +34,7 @@ function Products() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      let url = "http://localhost:5000/api/products?";
+      let url = `${API_BASE_URL}/api/products?`;
       if (category) url += `category=${category}&`;
       if (search) url += `search=${search}&`;
       if (sort) url += `sort=${sort}&`;
@@ -185,7 +186,7 @@ function Products() {
                     <div className="product-img-wrapper">
                       {product.stock === 0 && <span className="product-badge">Out of Stock</span>}
                       <img 
-                        src={product.image.startsWith("http") ? product.image : `http://localhost:5000/images/${product.image}`} 
+                        src={getImageUrl(product.image)} 
                         alt={product.name} 
                         className="product-img"
                       />

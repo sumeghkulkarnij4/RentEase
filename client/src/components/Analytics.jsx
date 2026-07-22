@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config/api";
 import "../styles/analytics.css";
 
 import RevenueChart from "../components/RevenueChart";
@@ -23,7 +24,7 @@ function Analytics() {
   const fetchAnalytics = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/dashboard/analytics"
+        `${API_BASE_URL}/api/dashboard/analytics`
       );
 
       const data = await res.json();

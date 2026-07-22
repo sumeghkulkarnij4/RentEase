@@ -7,6 +7,7 @@ import {
   Building2, Phone, Sparkles, Smartphone, Landmark, Wallet
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { API_BASE_URL, getImageUrl } from "./config/api";
 import "./styles/shopping.css";
 
 const PAYMENT_METHODS = [
@@ -249,7 +250,7 @@ function Checkout() {
         total: totalAmount
       };
 
-      const res = await fetch("http://localhost:5000/api/orders", {
+      const res = await fetch(`${API_BASE_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -548,7 +549,7 @@ function Checkout() {
                 {cart.map((item) => (
                   <div key={item._id} style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                     <img
-                      src={item.image.startsWith("http") ? item.image : `http://localhost:5000/images/${item.image}`}
+                      src={getImageUrl(item.image)}
                       alt={item.name}
                       style={{ width: "52px", height: "52px", objectFit: "cover", borderRadius: "8px", border: "1px solid var(--border)" }}
                       onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=300"; }}

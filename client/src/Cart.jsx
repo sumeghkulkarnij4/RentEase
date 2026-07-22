@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Trash2, ArrowRight, ShoppingBag, ArrowLeft, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getImageUrl } from "./config/api";
 import "./styles/shopping.css";
 
 function Cart() {
@@ -102,7 +103,7 @@ function Cart() {
                   transition={{ duration: 0.3 }}
                 >
                   <img 
-                    src={item.image.startsWith("http") ? item.image : `http://localhost:5000/images/${item.image}`} 
+                    src={getImageUrl(item.image)} 
                     alt={item.name} 
                     className="cart-item-img"
                   />
