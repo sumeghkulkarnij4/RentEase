@@ -1,10 +1,16 @@
 const Razorpay = require("razorpay");
 const crypto = require("crypto");
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+// Lazy getter — only instantiates when an actual payment request is made
+const getRazorpay = () => {
+  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+    throw new Error("Razorpay credentials are not configured. Set RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET.");
+  }
+  return new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  });
+};
 
 // Create Razorpay Order
 exports.createOrder = async (req, res) => {
@@ -17,6 +23,7 @@ exports.createOrder = async (req, res) => {
       receipt: `receipt_${Date.now()}`,
     };
 
+    const razorpay = getRazorpay();
     const order = await razorpay.orders.create(options);
 
     res.status(200).json(order);
