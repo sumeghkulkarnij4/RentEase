@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, Filter, Search, X } from "lucide-react";
+import { Filter, Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { API_BASE_URL, getImageUrl } from "./config/api";
 import "./styles/shopping.css";
@@ -10,7 +10,7 @@ function Products() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  // Filters State
+  // Filters
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [search, setSearch] = useState("");
@@ -19,6 +19,7 @@ function Products() {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
+
     const catParam = params.get("category");
     const searchParam = params.get("search");
 
@@ -33,25 +34,29 @@ function Products() {
 
   const fetchProducts = async () => {
     setLoading(true);
+
     try {
       let url = `${API_BASE_URL}/api/products?`;
+
       if (category) url += `category=${category}&`;
       if (search) url += `search=${search}&`;
       if (sort) url += `sort=${sort}&`;
-      
+
       const res = await fetch(url);
       const data = await res.json();
-      
-      // Client side price filtering
+
       let filtered = data;
+
       if (priceRange === "under-1000") {
-        filtered = data.filter(p => p.rent < 1000);
+        filtered = data.filter((p) => p.rent < 1000);
       } else if (priceRange === "1000-5000") {
-        filtered = data.filter(p => p.rent >= 1000 && p.rent <= 5000);
+        filtered = data.filter(
+          (p) => p.rent >= 1000 && p.rent <= 5000
+        );
       } else if (priceRange === "above-5000") {
-        filtered = data.filter(p => p.rent > 5000);
+        filtered = data.filter((p) => p.rent > 5000);
       }
-      
+
       setProducts(filtered);
     } catch (err) {
       console.error("Failed to fetch products", err);
@@ -66,21 +71,37 @@ function Products() {
     setSearch("");
     setSort("");
   };
-console.log("Products state:", products);
-console.log("Loading:", loading);
+
   return (
     <div className="shop-page">
       <div className="container">
-        
+
         <div className="shop-header">
           <div className="shop-title">
             <h1>Premium Collection</h1>
-            <p>Discover our carefully curated selection of furniture and appliances.</p>
+            <p>
+              Discover our carefully curated selection of furniture and appliances.
+            </p>
           </div>
-          
-          <div className="hide-mobile" style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <span style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>Sort by:</span>
-            <select 
+
+          <div
+            className="hide-mobile"
+            style={{
+              display: "flex",
+              gap: "16px",
+              alignItems: "center",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "14px",
+                color: "var(--text-secondary)",
+              }}
+            >
+              Sort by:
+            </span>
+
+            <select
               className="sort-select"
               value={sort}
               onChange={(e) => setSort(e.target.value)}
@@ -91,185 +112,468 @@ console.log("Loading:", loading);
               <option value="newest">Newest Arrivals</option>
             </select>
           </div>
-          
-          <button 
-            className="btn-secondary hide-desktop" 
-            style={{ padding: '10px 16px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', gap: '8px' }}
+
+          <button
+            className="btn-secondary hide-desktop"
+            style={{
+              padding: "10px 16px",
+              borderRadius: "var(--radius-full)",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
             onClick={() => setMobileFiltersOpen(true)}
           >
-            <Filter size={16} /> Filters
+            <Filter size={16} />
+            Filters
           </button>
         </div>
 
         <div className="shop-layout">
-          
-          {/* SIDEBAR FILTERS (Desktop) */}
+                    {/* ================= SIDEBAR FILTERS ================= */}
+
           <div className="shop-sidebar hide-mobile">
+
+            {/* Search */}
+
             <div className="filter-group">
               <h3 className="filter-title">Search</h3>
-              <div style={{ position: 'relative' }}>
-                <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                <input 
-                  type="text" 
-                  className="input-premium" 
-                  placeholder="Search products..." 
-                  style={{ paddingLeft: '36px', paddingRight: '12px', paddingTop: '10px', paddingBottom: '10px' }}
+
+              <div style={{ position: "relative" }}>
+                <Search
+                  size={16}
+                  style={{
+                    position: "absolute",
+                    left: "12px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "var(--text-muted)",
+                  }}
+                />
+
+                <input
+                  type="text"
+                  className="input-premium"
+                  placeholder="Search products..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
+                  style={{
+                    paddingLeft: "36px",
+                    paddingRight: "12px",
+                    paddingTop: "10px",
+                    paddingBottom: "10px",
+                  }}
                 />
               </div>
             </div>
 
+            {/* Categories */}
+
             <div className="filter-group">
               <h3 className="filter-title">Categories</h3>
+
               <label className="filter-label">
-                <input type="radio" name="cat" className="filter-checkbox" checked={category === ""} onChange={() => setCategory("")} /> All Categories
+                <input
+                  type="radio"
+                  name="cat"
+                  className="filter-checkbox"
+                  checked={category === ""}
+                  onChange={() => setCategory("")}
+                />
+                {" "}All Categories
               </label>
+
               <label className="filter-label">
-                <input type="radio" name="cat" className="filter-checkbox" checked={category === "Furniture"} onChange={() => setCategory("Furniture")} /> Furniture
+                <input
+                  type="radio"
+                  name="cat"
+                  className="filter-checkbox"
+                  checked={category === "Furniture"}
+                  onChange={() => setCategory("Furniture")}
+                />
+                {" "}Furniture
               </label>
+
               <label className="filter-label">
-                <input type="radio" name="cat" className="filter-checkbox" checked={category === "Appliances"} onChange={() => setCategory("Appliances")} /> Appliances
+                <input
+                  type="radio"
+                  name="cat"
+                  className="filter-checkbox"
+                  checked={category === "Appliances"}
+                  onChange={() => setCategory("Appliances")}
+                />
+                {" "}Appliances
               </label>
+
               <label className="filter-label">
-                <input type="radio" name="cat" className="filter-checkbox" checked={category === "Electronics"} onChange={() => setCategory("Electronics")} /> Electronics
+                <input
+                  type="radio"
+                  name="cat"
+                  className="filter-checkbox"
+                  checked={category === "Electronics"}
+                  onChange={() => setCategory("Electronics")}
+                />
+                {" "}Electronics
               </label>
             </div>
 
+            {/* Price Filter */}
+
             <div className="filter-group">
-              <h3 className="filter-title">Price Range (Monthly)</h3>
+              <h3 className="filter-title">
+                Price Range (Monthly)
+              </h3>
+
               <label className="filter-label">
-                <input type="radio" name="price" className="filter-checkbox" checked={priceRange === ""} onChange={() => setPriceRange("")} /> Any Price
+                <input
+                  type="radio"
+                  name="price"
+                  className="filter-checkbox"
+                  checked={priceRange === ""}
+                  onChange={() => setPriceRange("")}
+                />
+                {" "}Any Price
               </label>
+
               <label className="filter-label">
-                <input type="radio" name="price" className="filter-checkbox" checked={priceRange === "under-1000"} onChange={() => setPriceRange("under-1000")} /> Under ₹1,000
+                <input
+                  type="radio"
+                  name="price"
+                  className="filter-checkbox"
+                  checked={priceRange === "under-1000"}
+                  onChange={() => setPriceRange("under-1000")}
+                />
+                {" "}Under ₹1,000
               </label>
+
               <label className="filter-label">
-                <input type="radio" name="price" className="filter-checkbox" checked={priceRange === "1000-5000"} onChange={() => setPriceRange("1000-5000")} /> ₹1,000 - ₹5,000
+                <input
+                  type="radio"
+                  name="price"
+                  className="filter-checkbox"
+                  checked={priceRange === "1000-5000"}
+                  onChange={() => setPriceRange("1000-5000")}
+                />
+                {" "}₹1,000 - ₹5,000
               </label>
+
               <label className="filter-label">
-                <input type="radio" name="price" className="filter-checkbox" checked={priceRange === "above-5000"} onChange={() => setPriceRange("above-5000")} /> Above ₹5,000
+                <input
+                  type="radio"
+                  name="price"
+                  className="filter-checkbox"
+                  checked={priceRange === "above-5000"}
+                  onChange={() => setPriceRange("above-5000")}
+                />
+                {" "}Above ₹5,000
               </label>
             </div>
-            
+
             {(category || search || priceRange || sort) && (
-              <button 
+              <button
                 onClick={clearFilters}
-                className="btn-ghost" 
-                style={{ width: '100%', padding: '10px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', fontSize: '14px', fontWeight: '600' }}
+                className="btn-ghost"
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  borderRadius: "var(--radius-md)",
+                  border: "1px solid var(--border)",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                }}
               >
                 Clear All Filters
               </button>
             )}
           </div>
 
-          {/* PRODUCT GRID */}
-          <div className="shop-content">
-            {loading ? (
-              <div className="products-grid">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="product-card">
-                    <div className="product-img-wrapper skeleton"></div>
-                    <div className="skeleton" style={{ height: '24px', width: '80%', marginBottom: '8px' }}></div>
-                    <div className="skeleton" style={{ height: '16px', width: '50%' }}></div>
-                  </div>
-                ))}
-              </div>
-            ) : products.length > 0 ? (
-              <motion.div 
-                className="products-grid"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <>
-  {products.map((product) => (
-    <div
-      key={product._id}
+          {/* ================= PRODUCT GRID ================= */}
+
+          <div className="shop-content">{loading ? (
+  <div className="products-grid">
+    {[...Array(6)].map((_, i) => (
+      <div key={i} className="product-card">
+        <div className="product-img-wrapper skeleton"></div>
+
+        <div
+          className="skeleton"
+          style={{
+            height: "24px",
+            width: "80%",
+            marginBottom: "8px",
+          }}
+        ></div>
+
+        <div
+          className="skeleton"
+          style={{
+            height: "16px",
+            width: "50%",
+          }}
+        ></div>
+      </div>
+    ))}
+  </div>
+) : products.length > 0 ? (
+  <motion.div
+    className="products-grid"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    {products.map((product) => (
+      <Link
+        key={product._id}
+        to={`/product/${product._id}`}
+        className="product-card card-premium"
+        style={{
+          textDecoration: "none",
+          padding: "16px",
+          color: "inherit",
+        }}
+      >
+        <div className="product-img-wrapper">
+          {product.stock === 0 && (
+            <span className="product-badge">
+              Out of Stock
+            </span>
+          )}
+
+          <img
+            src={getImageUrl(product.image)}
+            alt={product.name}
+            className="product-img"
+            loading="lazy"
+          />
+        </div>
+
+        <div className="product-info">
+          <h3 className="product-name">
+            {product.name}
+          </h3>
+
+          <div className="product-price">
+            <span>₹{product.rent}</span> / month
+          </div>
+
+          <button
+            className="btn-primary"
+            style={{
+              width: "100%",
+              marginTop: "15px",
+            }}
+          >
+            View Details
+          </button>
+        </div>
+      </Link>
+    ))}
+  </motion.div>
+) : (
+  <div className="empty-state">
+    <Search size={48} />
+
+    <h3 className="h3-premium">
+      No products found
+    </h3>
+
+    <p
       style={{
-        color: "white",
-        border: "1px solid white",
-        margin: "10px",
-        padding: "10px",
+        color: "var(--text-secondary)",
+        marginTop: "8px",
+        marginBottom: "24px",
       }}
     >
-      <h3>{product.name}</h3>
-      <p>{product.rent}</p>
-    </div>
-  ))}
-</>
-              </motion.div>
-            ) : (
-              <div className="empty-state">
-                <Search size={48} />
-                <h3 className="h3-premium">No products found</h3>
-                <p style={{ color: 'var(--text-secondary)', marginTop: '8px', marginBottom: '24px' }}>Try adjusting your filters or search term.</p>
-                <button onClick={clearFilters} className="btn-premium btn-primary">Clear Filters</button>
-              </div>
-            )}
-          </div>
+      Try adjusting your filters or search term.
+    </p>
+
+    <button
+      onClick={clearFilters}
+      className="btn-premium btn-primary"
+    >
+      Clear Filters
+    </button>
+  </div>
+)}</div>
         </div>
       </div>
 
       {/* MOBILE FILTERS MODAL */}
       <AnimatePresence>
         {mobileFiltersOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="mobile-menu-overlay hide-desktop"
             style={{ zIndex: 100, top: 0 }}
           >
-            <div className="card-premium" style={{ height: '100%', borderRadius: 0, padding: '24px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                <h2 className="h2-premium" style={{ fontSize: '24px' }}>Filters</h2>
-                <button className="btn-icon" onClick={() => setMobileFiltersOpen(false)}><X size={24} /></button>
+            <div
+              className="card-premium"
+              style={{
+                height: "100%",
+                borderRadius: 0,
+                padding: "24px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: "24px",
+                }}
+              >
+                <h2
+                  className="h2-premium"
+                  style={{ fontSize: "24px" }}
+                >
+                  Filters
+                </h2>
+
+                <button
+                  className="btn-icon"
+                  onClick={() => setMobileFiltersOpen(false)}
+                >
+                  <X size={24} />
+                </button>
               </div>
-              
-              <div style={{ flex: 1, overflowY: 'auto' }}>
-                {/* Same filters as sidebar */}
+
+              <div style={{ flex: 1, overflowY: "auto" }}>
                 <div className="filter-group">
-                  <h3 className="filter-title">Categories</h3>
+                  <h3 className="filter-title">
+                    Categories
+                  </h3>
+
                   <label className="filter-label">
-                    <input type="radio" name="mobile-cat" className="filter-checkbox" checked={category === ""} onChange={() => setCategory("")} /> All Categories
+                    <input
+                      type="radio"
+                      name="mobile-cat"
+                      className="filter-checkbox"
+                      checked={category === ""}
+                      onChange={() => setCategory("")}
+                    />
+                    {" "}All Categories
                   </label>
+
                   <label className="filter-label">
-                    <input type="radio" name="mobile-cat" className="filter-checkbox" checked={category === "Furniture"} onChange={() => setCategory("Furniture")} /> Furniture
+                    <input
+                      type="radio"
+                      name="mobile-cat"
+                      className="filter-checkbox"
+                      checked={category === "Furniture"}
+                      onChange={() =>
+                        setCategory("Furniture")
+                      }
+                    />
+                    {" "}Furniture
                   </label>
+
                   <label className="filter-label">
-                    <input type="radio" name="mobile-cat" className="filter-checkbox" checked={category === "Appliances"} onChange={() => setCategory("Appliances")} /> Appliances
+                    <input
+                      type="radio"
+                      name="mobile-cat"
+                      className="filter-checkbox"
+                      checked={category === "Appliances"}
+                      onChange={() =>
+                        setCategory("Appliances")
+                      }
+                    />
+                    {" "}Appliances
                   </label>
+
                   <label className="filter-label">
-                    <input type="radio" name="mobile-cat" className="filter-checkbox" checked={category === "Electronics"} onChange={() => setCategory("Electronics")} /> Electronics
+                    <input
+                      type="radio"
+                      name="mobile-cat"
+                      className="filter-checkbox"
+                      checked={category === "Electronics"}
+                      onChange={() =>
+                        setCategory("Electronics")
+                      }
+                    />
+                    {" "}Electronics
                   </label>
                 </div>
 
                 <div className="filter-group">
-                  <h3 className="filter-title">Sort By</h3>
-                  <select 
+                  <h3 className="filter-title">
+                    Sort By
+                  </h3>
+
+                  <select
                     className="sort-select"
-                    style={{ width: '100%', marginTop: '8px' }}
+                    style={{
+                      width: "100%",
+                      marginTop: "8px",
+                    }}
                     value={sort}
-                    onChange={(e) => setSort(e.target.value)}
+                    onChange={(e) =>
+                      setSort(e.target.value)
+                    }
                   >
-                    <option value="">Recommended</option>
-                    <option value="price_asc">Price: Low to High</option>
-                    <option value="price_desc">Price: High to Low</option>
-                    <option value="newest">Newest Arrivals</option>
+                    <option value="">
+                      Recommended
+                    </option>
+                    <option value="price_asc">
+                      Price: Low to High
+                    </option>
+                    <option value="price_desc">
+                      Price: High to Low
+                    </option>
+                    <option value="newest">
+                      Newest Arrivals
+                    </option>
                   </select>
                 </div>
               </div>
-              
-              <div style={{ marginTop: 'auto', paddingTop: '16px', borderTop: '1px solid var(--border)', display: 'flex', gap: '16px' }}>
-                <button onClick={clearFilters} className="btn-secondary" style={{ flex: 1, padding: '16px', borderRadius: 'var(--radius-full)', fontWeight: 'bold' }}>Clear</button>
-                <button onClick={() => setMobileFiltersOpen(false)} className="btn-primary" style={{ flex: 1, padding: '16px', borderRadius: 'var(--radius-full)', fontWeight: 'bold' }}>Apply</button>
+
+              <div
+                style={{
+                  marginTop: "auto",
+                  paddingTop: "16px",
+                  borderTop:
+                    "1px solid var(--border)",
+                  display: "flex",
+                  gap: "16px",
+                }}
+              >
+                <button
+                  onClick={clearFilters}
+                  className="btn-secondary"
+                  style={{
+                    flex: 1,
+                    padding: "16px",
+                    borderRadius:
+                      "var(--radius-full)",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Clear
+                </button>
+
+                <button
+                  onClick={() =>
+                    setMobileFiltersOpen(false)
+                  }
+                  className="btn-primary"
+                  style={{
+                    flex: 1,
+                    padding: "16px",
+                    borderRadius:
+                      "var(--radius-full)",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Apply
+                </button>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }
