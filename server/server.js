@@ -11,8 +11,12 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = process.env.FRONTEND_URL
-  ? [process.env.FRONTEND_URL, "http://localhost:5173", "http://localhost:3000"]
-  : true; // allow all in dev if not set
+  ? [
+      process.env.FRONTEND_URL,
+      "http://localhost:5173",
+      "http://localhost:3000",
+    ]
+  : true; // Allow all in development if FRONTEND_URL is not set
 
 app.use(
   cors({
@@ -35,8 +39,7 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const userRoutes = require("./routes/userRoutes");
 const damageRoutes = require("./routes/damageRoutes");
 const recommendationRoutes = require("./routes/recommendationRoutes");
-const paymentRoutes=require("./routes/paymentRoutes");
-
+const paymentRoutes = require("./routes/paymentRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
@@ -46,7 +49,7 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/damage", damageRoutes);
 app.use("/api/recommendations", recommendationRoutes);
-app.use("/api/payment",paymentRoutes);
+app.use("/api/payment", paymentRoutes);
 
 /* ================= TEST ================= */
 
@@ -58,8 +61,12 @@ app.get("/", (req, res) => {
 
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+  .then(() => {
+    console.log("MongoDB Connected");
+  })
+  .catch((err) => {
+    console.error("MongoDB Connection Error:", err);
+  });
 
 /* ================= SERVER ================= */
 
