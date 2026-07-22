@@ -1,0 +1,220 @@
+/* ============================================================
+   RentEase – profile.css | Profile Dashboard Styles
+   ============================================================ */
+
+.profile-page {
+  padding: 120px 0 80px;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.profile-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+  .profile-layout {
+    flex-direction: column;
+  }
+}
+
+/* ===== PROFILE SIDEBAR ===== */
+.profile-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .profile-sidebar {
+    width: 100%;
+  }
+}
+
+.profile-user-card {
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.profile-avatar-container {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--secondary), var(--border));
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 4px solid var(--surface);
+  box-shadow: var(--shadow-md);
+  color: var(--text-muted);
+}
+
+.profile-avatar-container svg {
+  width: 48px;
+  height: 48px;
+}
+
+.profile-edit-avatar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 3px solid var(--surface);
+  transition: all var(--transition-fast);
+}
+
+.profile-edit-avatar:hover {
+  transform: scale(1.1);
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.profile-email {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.profile-role-badge {
+  display: inline-block;
+  background: var(--info-bg);
+  color: var(--info);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.profile-nav {
+  padding: 16px 0;
+}
+
+.profile-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.profile-nav-item:hover {
+  background: var(--secondary);
+  color: var(--text);
+}
+
+.profile-nav-item.active {
+  background: var(--secondary);
+  color: var(--primary);
+  border-left-color: var(--primary);
+}
+
+/* ===== PROFILE CONTENT ===== */
+.profile-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-section-header {
+  margin-bottom: 24px;
+}
+
+.profile-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.profile-section-desc {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 640px) {
+  .profile-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile-stat-card {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+
+.profile-stat-info h4 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.profile-stat-info p {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 640px) {
+  .profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile-form-full {
+  grid-column: 1 / -1;
+}
+
+.settings-card {
+  padding: 32px;
+}

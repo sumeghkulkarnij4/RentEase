@@ -1,0 +1,326 @@
+/* ============================================================
+   RentEase – postpurchase.css | Orders & Rentals Page Styles
+   ============================================================ */
+
+.postpurchase-page {
+  padding: 100px 0 80px;
+  min-height: 100vh;
+  background: var(--background);
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  margin-bottom: 40px;
+}
+
+.page-header h1 {
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 800;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.page-header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-pill:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.filter-pill.active {
+  background: var(--primary);
+  color: var(--background);
+  border-color: var(--primary);
+}
+
+/* ===== ORDER CARD ===== */
+.order-card-premium {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.order-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.order-id {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.order-date {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.order-card-body {
+  padding: 24px 28px;
+}
+
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.order-item-img {
+  width: 72px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  object-fit: contain;
+  padding: 4px;
+}
+
+.order-item-details h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.order-item-details p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ===== TRACKING TIMELINE ===== */
+.tracking-timeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.track-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  flex: 1;
+  min-width: 80px;
+}
+
+.track-node:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: calc(50% + 14px);
+  top: 14px;
+  width: calc(100% - 28px);
+  height: 2px;
+  background: var(--border);
+}
+
+.track-node.done::after {
+  background: var(--primary);
+}
+
+.track-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--secondary);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: all var(--transition);
+}
+
+.track-node.done .track-dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--background);
+}
+
+.track-node.current .track-dot {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--background);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.track-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.track-node.done .track-label,
+.track-node.current .track-label {
+  color: var(--primary);
+}
+
+.order-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  border-top: 1px solid var(--border);
+  background: var(--secondary);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.order-total {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.order-actions-row {
+  display: flex;
+  gap: 12px;
+}
+
+/* ===== RENTAL CARD ===== */
+.rental-card-premium {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.rental-card-body {
+  padding: 28px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+@media (max-width: 640px) {
+  .rental-card-body {
+    flex-direction: column;
+  }
+}
+
+.rental-img {
+  width: 140px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  padding: 12px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.rental-info {
+  flex: 1;
+}
+
+.rental-name {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.rental-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.rental-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Days Remaining Progress Bar */
+.days-remaining {
+  margin-top: 8px;
+}
+
+.days-remaining-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--secondary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--primary), #6366f1);
+  transition: width var(--transition-slow);
+}
+
+.rental-card-footer {
+  padding: 16px 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--secondary);
+}
