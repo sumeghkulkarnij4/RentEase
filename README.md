@@ -230,7 +230,7 @@ RAZORPAY_KEY_SECRET=your_secret
 
 ## 🏠 Home
 
-![Home](screenshots/home.png)
+![Home](C:\Users\sumeg\OneDrive\Desktop\home.jpg)
 
 ---
 
