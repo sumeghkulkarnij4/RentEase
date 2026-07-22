@@ -66,7 +66,8 @@ function Products() {
     setSearch("");
     setSort("");
   };
-
+console.log("Products state:", products);
+console.log("Loading:", loading);
   return (
     <div className="shop-page">
       <div className="container">
@@ -181,24 +182,22 @@ function Products() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                {products.map((product) => (
-                  <Link to={`/product/${product._id}`} key={product._id} className="product-card card-premium" style={{ textDecoration: 'none', padding: '16px' }}>
-                    <div className="product-img-wrapper">
-                      {product.stock === 0 && <span className="product-badge">Out of Stock</span>}
-                      <img 
-                        src={getImageUrl(product.image)} 
-                        alt={product.name} 
-                        className="product-img"
-                      />
-                    </div>
-                    <div className="product-info">
-                      <h3 className="product-name">{product.name}</h3>
-                      <div className="product-price">
-                        <span>₹{product.rent}</span> / month
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+                <>
+  {products.map((product) => (
+    <div
+      key={product._id}
+      style={{
+        color: "white",
+        border: "1px solid white",
+        margin: "10px",
+        padding: "10px",
+      }}
+    >
+      <h3>{product.name}</h3>
+      <p>{product.rent}</p>
+    </div>
+  ))}
+</>
               </motion.div>
             ) : (
               <div className="empty-state">
