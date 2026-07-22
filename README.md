@@ -230,7 +230,7 @@ RAZORPAY_KEY_SECRET=your_secret
 
 ## 🏠 Home
 
-> Add screenshot here
+![Home](screenshots/home.png)
 
 ---
 
