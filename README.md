@@ -1,78 +1,62 @@
 # 🏠 RentEase – Furniture & Appliance Rental Platform
 
-<p align="center">
-  <img src="https://img.shields.io/badge/MERN-Full%20Stack-blue?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react" />
-  <img src="https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=node.js" />
-  <img src="https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge&logo=mongodb" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" />
-</p>
+A modern **MERN Stack Furniture & Appliance Rental Platform** that allows users to rent furniture and home appliances with a seamless online experience. The platform includes secure authentication, product management, shopping cart, wishlist, rental management, checkout, order tracking, and an admin dashboard.
+
+Designed with a modern, responsive UI inspired by platforms like **Furlenco**, **IKEA**, and **Airbnb**.
 
 ---
 
-## 📖 Overview
+## ✨ Features
 
-**RentEase** is a full-stack MERN application that allows users to rent furniture and home appliances with a seamless online experience. The platform offers secure authentication, product browsing, shopping cart, wishlist, rental management, checkout, and an admin dashboard for managing products and orders.
+### 👤 User Features
 
-The application is designed with a modern, responsive UI inspired by premium rental platforms like **Furlenco**, **IKEA**, and **Airbnb**.
-
----
-
-# ✨ Features
-
-## 👤 User Features
-
-- Secure User Registration & Login (JWT Authentication)
-- Profile Management
+- Secure User Registration & Login
+- JWT Authentication
+- User Profile Management
 - Browse Furniture & Appliances
 - Search, Filter & Sort Products
 - Product Details Page
-- Wishlist
+- Wishlist Management
 - Shopping Cart
 - Rental Duration Selection
 - Checkout System
 - Multiple Payment Methods
 - Order History
 - Active Rentals
-- Responsive Design
-- Dark / Light Mode
+- Dark & Light Theme
+- Fully Responsive Design
 
 ---
 
-## 🛒 Shopping Features
+### 🛒 Shopping Features
 
-- Product Categories
-- Product Search
-- Wishlist
+- Browse Products by Category
+- Search & Filter
 - Add to Cart
-- Quantity Management
-- Rental Duration
+- Wishlist
+- Rental Duration Selection
 - Order Summary
-- Coupon Support
 - Delivery Details
 - Secure Checkout
 
 ---
 
-## 📦 Rental Management
+### 📦 Rental Management
 
-- View Active Rentals
-- Rental Timeline
-- Order Tracking
+- Active Rentals
 - Rental History
-- Delivery Information
+- Order Tracking
+- Delivery Details
 - Invoice Support
 
 ---
 
-## 👨‍💼 Admin Features
+### 👨‍💼 Admin Features
 
-- Admin Login
+- Secure Admin Login
 - Dashboard Analytics
 - Product Management
-- Add Products
-- Edit Products
-- Delete Products
+- Add / Edit / Delete Products
 - Order Management
 - User Management
 - Revenue Statistics
@@ -82,7 +66,6 @@ The application is designed with a modern, responsive UI inspired by premium ren
 # 🛠 Tech Stack
 
 ### Frontend
-
 - React.js
 - React Router DOM
 - Axios
@@ -90,52 +73,47 @@ The application is designed with a modern, responsive UI inspired by premium ren
 - Context API
 
 ### Backend
-
 - Node.js
 - Express.js
 
 ### Database
-
 - MongoDB Atlas
 - Mongoose
 
 ### Authentication
-
-- JWT
+- JWT (JSON Web Token)
 - bcrypt
 
-### Image Storage
+### Cloud Services
+- Cloudinary (Image Storage)
 
-- Cloudinary
-
-### Payment
-
+### Payment Integration
 - Razorpay
 
 ---
 
-# 📂 Folder Structure
+# 📂 Project Structure
 
-```text
+```
 RentEase
 │
 ├── client
 │   ├── public
 │   ├── src
-│   │   ├── components
-│   │   ├── pages
-│   │   ├── context
-│   │   ├── services
 │   │   ├── assets
+│   │   ├── components
+│   │   ├── context
+│   │   ├── pages
+│   │   ├── services
 │   │   └── App.jsx
 │   └── package.json
 │
 ├── server
+│   ├── config
 │   ├── controllers
 │   ├── middleware
 │   ├── models
 │   ├── routes
-│   ├── config
 │   ├── uploads
 │   └── server.js
 │
@@ -144,9 +122,9 @@ RentEase
 
 ---
 
-# 🚀 Installation
+# 🚀 Getting Started
 
-## Clone Repository
+## Clone the Repository
 
 ```bash
 git clone https://github.com/sumeghkulkarnij4/RentEase.git
@@ -158,16 +136,16 @@ cd RentEase
 
 ---
 
-## Install Frontend
+## Install Dependencies
+
+### Frontend
 
 ```bash
 cd client
 npm install
 ```
 
----
-
-## Install Backend
+### Backend
 
 ```bash
 cd ../server
@@ -176,9 +154,9 @@ npm install
 
 ---
 
-# ▶ Running the Project
+# ▶ Run the Application
 
-## Backend
+### Start Backend
 
 ```bash
 cd server
@@ -191,20 +169,24 @@ or
 npm run dev
 ```
 
----
-
-## Frontend
+### Start Frontend
 
 ```bash
 cd client
 npm run dev
 ```
 
+The application will be available at:
+
+```
+http://localhost:5173
+```
+
 ---
 
-# 🌐 Environment Variables
+# 🔑 Environment Variables
 
-Create a `.env` file inside the **server** folder.
+Create a `.env` file inside the **server** directory and configure the following variables:
 
 ```env
 PORT=5000
@@ -213,67 +195,42 @@ MONGO_URI=your_mongodb_connection_string
 
 JWT_SECRET=your_jwt_secret
 
-CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 
-CLOUDINARY_API_KEY=your_api_key
-
-CLOUDINARY_API_SECRET=your_api_secret
-
-RAZORPAY_KEY_ID=your_key
-
-RAZORPAY_KEY_SECRET=your_secret
+RAZORPAY_KEY_ID=your_razorpay_key
+RAZORPAY_KEY_SECRET=your_razorpay_secret
 ```
 
 ---
 
-# 📸 Screenshots
+# 📌 Key Highlights
 
-## 🏠 Home
-
-![Home](C:\Users\sumeg\OneDrive\Desktop\home.jpg)
-
----
-
-## 📦 Products
-
-> Add screenshot here
-
----
-
-## 🛒 Cart
-
-> Add screenshot here
+- Full-Stack MERN Application
+- Responsive User Interface
+- Secure JWT Authentication
+- Role-Based Access Control
+- Product Management System
+- Shopping Cart & Wishlist
+- Rental Management
+- Order Tracking
+- Admin Dashboard
+- Cloudinary Image Upload
+- Razorpay Payment Integration
+- Dark & Light Theme
 
 ---
 
-## 💳 Checkout
-
-> Add screenshot here
-
----
-
-## 📦 Orders
-
-> Add screenshot here
-
----
-
-## 👨‍💼 Admin Dashboard
-
-> Add screenshot here
-
----
-
-# 🎯 Future Improvements
+# 🎯 Future Enhancements
 
 - Email Notifications
 - Product Reviews & Ratings
-- AI Product Recommendations
-- Chat Support
-- PWA Support
+- AI-Based Product Recommendations
 - Multi-language Support
-- Advanced Analytics
-- Inventory Forecasting
+- Progressive Web App (PWA)
+- Live Chat Support
+- Advanced Analytics Dashboard
 
 ---
 
@@ -282,30 +239,28 @@ RAZORPAY_KEY_SECRET=your_secret
 **Sumegh Kulkarni**
 
 - GitHub: https://github.com/sumeghkulkarnij4
-- LinkedIn: *(Add your LinkedIn profile here)*
+- LinkedIn: *(Add your LinkedIn profile URL here)*
 
 ---
 
-# 🙏 Acknowledgements
+# 🤝 Contributing
 
-Inspired by:
+Contributions, suggestions, and improvements are welcome.
 
-- Furlenco
-- IKEA
-- Airbnb
-- Pepperfry
-- React.js
-- Node.js
-- MongoDB
+1. Fork the repository.
+2. Create a new feature branch.
+3. Commit your changes.
+4. Push your branch.
+5. Open a Pull Request.
 
 ---
 
 # ⭐ Support
 
-If you found this project helpful, consider giving it a **⭐ Star** on GitHub.
+If you found this project useful, consider giving it a **⭐ Star** on GitHub.
 
 ---
 
-## 📜 License
+# 📄 License
 
 This project is licensed under the **MIT License**.
